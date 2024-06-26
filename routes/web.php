@@ -47,7 +47,7 @@ if(function_exists("isAdminPackage")) {
         Route::resource('social', \Jiny\Users\Http\Controllers\Admin\SocialController::class);
 
         // 사이트 데쉬보드
-        Route::get('/', [\Jiny\Users\Http\Controllers\Admin\Dashboard::class, "index"]);
+        //Route::get('/', [\Jiny\Users\Http\Controllers\Admin\Dashboard::class, "index"]);
 
     });
 }
