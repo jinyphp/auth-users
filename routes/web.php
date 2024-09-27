@@ -16,34 +16,59 @@ if(function_exists("isAdminPackage")) {
     Route::middleware(['web','auth:sanctum', 'verified', 'admin'])
     ->name('admin.auth')
     ->prefix($prefix.'/auth')->group(function () {
+        // 회원등급
+        Route::get('grade',[
+            \Jiny\Users\Http\Controllers\Admin\AdminUserGradeContoller::class,
+            "index"]);
 
-        Route::resource('users',\Jiny\Users\Http\Controllers\Admin\UserController::class);
-        //Route::resource('roles',\Jiny\Users\Http\Controllers\Admin\RoleController::class);
+        // 권한
+        Route::get('roles',[
+            \Jiny\Users\Http\Controllers\Admin\RoleController::class,
+            "index"]);
 
-        Route::resource('reserved',\Jiny\Users\Http\Controllers\Admin\ReservedController::class);
-        Route::resource('blacklist',\Jiny\Users\Http\Controllers\Admin\AdminUserBlacklistController::class);
+        // 휴면회원
+        Route::get('sleeper',[
+            \Jiny\Users\Http\Controllers\Admin\AdminUserSleeperContoller::class,
+            "index"]);
+
+        // 회원제한 : 예약어
+        Route::get('reserved',[
+            \Jiny\Users\Http\Controllers\Admin\ReservedController::class,
+            "index"]);
+
+        // 회원제한 : 블렉리스트
+        Route::get('blacklist',[
+            \Jiny\Users\Http\Controllers\Admin\AdminUserBlacklistController::class,
+            "index"]);
+
+
+        // 확인
+        Route::get('confirm',[
+            \Jiny\Users\Http\Controllers\Admin\AdminUserConfirmContoller::class,
+            "index"]);
+
+
+
+        // 지역
+        Route::get('locale',[
+            \Jiny\Users\Http\Controllers\Admin\AdminUserLocaleContoller::class,
+            'index']);
+
+        // 회원 국가
+        Route::get('/country',[
+            \Jiny\Users\Http\Controllers\Admin\AdminUserCountryController::class,
+            'index']);
+
 
         Route::get('logs/{id}',[
             \Jiny\Users\Http\Controllers\Admin\AdminUserLogController::class,
             "index"])->where('id', '[0-9]+');
-
-        Route::resource('grade',\Jiny\Users\Http\Controllers\Admin\AdminUserGradeContoller::class);
-
-        Route::resource('sleeper',\Jiny\Users\Http\Controllers\Admin\AdminUserSleeperContoller::class);
-        Route::resource('confirm',\Jiny\Users\Http\Controllers\Admin\AdminUserConfirmContoller::class);
 
         // 패스워드 유효기간 연장
         Route::get('password',[
             \Jiny\Users\Http\Controllers\Admin\AdminUserPasswordContoller::class,
             'index']);
 
-        Route::get('locale',[
-            \Jiny\Users\Http\Controllers\Admin\AdminUserLocaleContoller::class,
-            'index']);
-
-
-
-        Route::resource('country', \Jiny\Users\Http\Controllers\Admin\AdminUserCountryController::class);
         Route::resource('social', \Jiny\Users\Http\Controllers\Admin\SocialController::class);
 
         // 사이트 데쉬보드

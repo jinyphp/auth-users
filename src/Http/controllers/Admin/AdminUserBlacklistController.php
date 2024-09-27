@@ -1,5 +1,4 @@
 <?php
-
 namespace Jiny\Users\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -11,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
-use Jiny\Auth\Http\Controllers\AdminController;
-class AdminUserBlacklistController extends AdminController
+use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
+class AdminUserBlacklistController extends WireTablePopupForms
 {
     //const MENU_PATH = "menus";
     public function __construct()
@@ -31,6 +30,8 @@ class AdminUserBlacklistController extends AdminController
         //$this->actions['view']['title'] = "jiny-users::auth.reserved.title";
         //$this->actions['view']['filter'] = "jiny-users::auth.reserved.filter";
 
+        $this->actions['title'] = "블렉리스트 회원";
+        $this->actions['subtitle'] = "";
     }
 
 

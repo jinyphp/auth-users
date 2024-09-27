@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
 
-use Jiny\Auth\Http\Controllers\AdminController;
-class AdminUserPasswordContoller extends AdminController
+use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
+class AdminUserPasswordContoller extends WireTablePopupForms
 {
     public $setting;
 

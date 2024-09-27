@@ -1,5 +1,4 @@
 <?php
-
 namespace Jiny\Users\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -11,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
-use Jiny\Auth\Http\Controllers\AdminController;
-class ReservedController extends AdminController
+use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
+class ReservedController extends WireTablePopupForms
 {
     //const MENU_PATH = "menus";
     public function __construct()
@@ -30,6 +29,9 @@ class ReservedController extends AdminController
         //$this->actions['view']['main'] = "jiny-users::auth.reserved.main";
         //$this->actions['view']['title'] = "jiny-users::auth.reserved.title";
         //$this->actions['view']['filter'] = "jiny-users::auth.reserved.filter";
+
+        $this->actions['title'] = "예약된 회원";
+        $this->actions['subtitle'] = "예약된 회원은 가입이 제한됩니다.";
 
     }
 

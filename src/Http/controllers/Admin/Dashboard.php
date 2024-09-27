@@ -4,12 +4,14 @@ namespace Jiny\Users\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
-use Jiny\WireTable\Http\Controllers\DashboardController;
-class Dashboard extends DashboardController
+/**
+ * 회원 데시보드
+ */
+use Jiny\WireTable\Http\Controllers\SiteDashboard;
+class Dashboard extends SiteDashboard
 {
     use \Jiny\WireTable\Http\Trait\Permit;
     //use \Jiny\Table\Http\Controllers\SetMenu;

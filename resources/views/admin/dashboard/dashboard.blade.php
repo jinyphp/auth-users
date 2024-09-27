@@ -1,4 +1,3 @@
-@setTheme("admin.sidebar")
 <x-theme name="admin.sidebar">
     <x-theme-layout>
 

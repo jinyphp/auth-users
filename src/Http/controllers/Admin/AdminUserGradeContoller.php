@@ -1,5 +1,4 @@
 <?php
-
 namespace Jiny\Users\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -11,8 +10,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
-use Jiny\Auth\Http\Controllers\AdminController;
-class AdminUserGradeContoller extends AdminController
+/**
+ * 회원등급
+ */
+use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
+class AdminUserGradeContoller extends WireTablePopupForms
 {
     public function __construct()
     {
@@ -27,6 +29,8 @@ class AdminUserGradeContoller extends AdminController
         $this->actions['view']['form'] = "jiny-users::admin.grade.form";
 
         //$this->actions['role'] = true;
+        $this->actions['title'] = "회원등급";
+        $this->actions['subtitle'] = "회원의 등급을 지정합니다.";
     }
 
     // role당 사용자 수 계산출력
