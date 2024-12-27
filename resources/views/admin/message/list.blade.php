@@ -1,10 +1,10 @@
 <x-wire-table>
     <x-wire-thead>
         {{-- 테이블 제목 --}}
-        <th width='100'>코드</th>
-        <th width='100'>flag</th>
-        <th>국가명</th>
-
+        <th width='100'>작성자</th>
+        <th width='100'>수신자</th>
+        <th>내용</th>
+        <th width='100'>확인</th>
         <th width='200'>등록일자</th>
 
     </x-wire-thead>
@@ -14,16 +14,27 @@
             <x-wire-tbody-item :selected="$selected" :item="$item">
                 {{-- 테이블 리스트 --}}
                 <td width='100'>
-                    {{$item->code}}
+                    {{$item->email}}
                 </td>
                 <td width='100'>
-                    {{$item->flag}}
+                    {{$item->to_email}}
                 </td>
                 <td>
-                    {{-- {!! $popupEdit($item, $item->name) !!} --}}
+                    @if($item->subject)
+                        <div wire:click="edit({{$item->id}})">
+                            {{$item->subject}}
+                        </div>
+                    @endif
+
                     <x-link-void wire:click="edit({{$item->id}})">
-                        {{$item->name}}
+                        {{$item->message}}
                     </x-link-void>
+                </td>
+
+                <td width='100'>
+                    @if($item->readed_at)
+                        읽음
+                    @endif
                 </td>
 
                 <td width='200'>{{$item->created_at}}</td>

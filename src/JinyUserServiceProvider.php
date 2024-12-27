@@ -32,8 +32,13 @@ class JinyUserServiceProvider extends ServiceProvider
     {
         /* 라이브와이어 컴포넌트 등록 */
         $this->app->afterResolving(BladeCompiler::class, function () {
-       
-            
+
+            Livewire::component('home-user_message',
+                \Jiny\Users\Http\Livewire\HomeUserMessage::class);
+
+            Livewire::component('home-user_reviews',
+                \Jiny\Users\Http\Livewire\HomeUserReviews::class);
+
         });
 
     }
