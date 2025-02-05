@@ -25,4 +25,29 @@ Route::middleware(['web','auth:sanctum', 'verified', 'admin'])
     Route::get('message/{id?}',[
         \Jiny\Users\Http\Controllers\Admin\AdminUserMessage::class,
         'index'])->where('id', '[0-9]+');
+
+
+
 });
+
+
+// Route::middleware(['web'])
+// ->name('message')
+// ->prefix('/message')->group(function () {
+//     // SSE 메시지 테스트
+//     Route::get('/',[
+//         \Jiny\Users\Http\Controllers\Admin\AdminSseMessage::class,
+//         'index']);
+
+// });
+
+// // API 메시지 테스트
+// Route::middleware(['web'])
+// ->name('api.message')
+// ->prefix('/api/message')->group(function () {
+//     // SSE 메시지 테스트
+//     Route::get('event',[
+//         \Jiny\Users\Http\Controllers\Admin\AdminSseMessage::class,
+//         'serverEvent']);
+
+// });

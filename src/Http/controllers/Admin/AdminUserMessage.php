@@ -23,6 +23,9 @@ class AdminUserMessage extends WireTablePopupForms
         $this->actions['table']['name'] = "user_messages"; // 테이블 정보
         $this->actions['paging'] = 10; // 페이지 기본값
 
+        $this->actions['view']['layout'] = "jiny-users::admin.message.layout";
+        $this->actions['view']['table'] = "jiny-users::admin.message.table";
+
         $this->actions['view']['list'] = "jiny-users::admin.message.list";
         $this->actions['view']['form'] = "jiny-users::admin.message.form";
 
@@ -51,18 +54,21 @@ class AdminUserMessage extends WireTablePopupForms
      */
     public function hookStoring($wire,$form)
     {
-        $user = Auth::user();
-        $form['user_id'] = $user->id;
-        $form['email'] = $user->email;
-        $form['name'] = $user->name;
-        $form['status'] = 'new';
-
-
-        if(isset($form['to_email'])) {
-            $user = DB::table('users')
-                ->where('email', $form['to_email'])
-                ->first();
+        if(isset($form['email']) && $form['email']) {
+            $user = Auth::user();
             $form['user_id'] = $user->id;
+            $form['email'] = $user->email;
+            $form['name'] = $user->name;
+        }
+
+
+        if(isset($form['from_email']) && $form['from_email']) {
+            $user = DB::table('users')
+                ->where('email', $form['from_email'])
+                ->first();
+            $form['from_user_id'] = $user->id;
+            $form['from_email'] = $user->email;
+            $form['from_name'] = $user->name;
         }
 
         return $form; // 사전 처리한 데이터를 반환합니다.
@@ -73,17 +79,29 @@ class AdminUserMessage extends WireTablePopupForms
      */
     public function hookUpdating($wire, $form, $old)
     {
-        $user = Auth::user();
-        $form['user_id'] = $user->id;
-        $form['email'] = $user->email;
-        $form['name'] = $user->name;
+        if(isset($form['email']) && $form['email']) {
+            $user = Auth::user();
+            $form['user_id'] = $user->id;
+            $form['email'] = $user->email;
+            $form['name'] = $user->name;
+        } else {
+            $form['email'] = null;
+            $form['name'] = null;
+            $form['user_id'] = null;
+        }
 
 
-        if(isset($form['to_email'])) {
+        if(isset($form['from_email']) && $form['from_email']) {
             $user = DB::table('users')
-                ->where('email', $form['to_email'])
+                ->where('email', $form['from_email'])
                 ->first();
-            $form['to_user_id'] = $user->id;
+            $form['from_user_id'] = $user->id;
+            $form['from_email'] = $user->email;
+            $form['from_name'] = $user->name;
+        } else {
+            $form['from_email'] = null;
+            $form['from_name'] = null;
+            $form['from_user_id'] = null;
         }
 
         return $form;

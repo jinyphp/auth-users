@@ -17,19 +17,25 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
+            $table->string('enable')->nullable();
+            $table->string('notice')->nullable();
+
             // 사용자 id 연동
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('email')->nullable();
             $table->string('name')->nullable();
 
-            $table->string('to_email')->nullable();
-            $table->string('to_name')->nullable();
-            $table->string('to_user_id')->nullable();
+            $table->string('from_email')->nullable();
+            $table->string('from_name')->nullable();
+            $table->string('from_user_id')->nullable();
 
             $table->string('subject')->nullable();
             $table->text('message')->nullable();
 
             $table->string('status')->nullable();
+            $table->string('label')->nullable();
+
+            // 확인시간
             $table->string('readed_at')->nullable();
 
 
